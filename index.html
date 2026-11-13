@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10251d">
+<meta name="description" content="A private, consent-first sexual wellness and relationship education app.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Innerly">
+<title>Innerly — Private Wellness</title>
+<style>
+:root{--bg:#f4f6f1;--surface:#fff;--ink:#17251f;--muted:#66766d;--line:#e1e8e1;--green:#174f3b;--green2:#26785a;--mint:#e7f2eb;--gold:#c7a568;--rose:#f7e9e8;--shadow:0 12px 36px rgba(23,55,40,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Noto Sans Bengali",sans-serif;line-height:1.5}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:1040px;margin:auto;min-height:100vh;padding-bottom:86px}
+.top{background:linear-gradient(130deg,#102b21,#1c5b42);color:#fff;padding:22px 20px 28px;border-radius:0 0 28px 28px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-weight:800;letter-spacing:.4px;font-size:17px}.brand small{display:block;color:#c8dfd1;font-size:10px;letter-spacing:2px;font-weight:600}
+.iconbtn{border:1px solid #ffffff45;background:#ffffff12;color:#fff;border-radius:12px;padding:9px 12px}
+.hero{padding:28px 0 8px;max-width:680px}.eyebrow{font-size:11px;letter-spacing:2px;color:#d7c18f;font-weight:700}.hero h1{font-size:clamp(30px,7vw,48px);line-height:1.08;margin:10px 0 12px;letter-spacing:-1.4px}.hero p{color:#dce9e0;max-width:570px;margin:0 0 20px}.cta{background:#f3dcae;color:#26372c;border:0;border-radius:14px;padding:13px 18px;font-weight:800;box-shadow:0 6px 18px #06180e33}
+.content{padding:18px 16px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:18px 2px 12px}.section-head h2{font-size:19px;margin:0}.section-head p{font-size:12px;color:var(--muted);margin:3px 0 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.tile,.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:15px;box-shadow:var(--shadow)}
+.tile{min-height:126px;text-align:left;color:var(--ink);display:flex;flex-direction:column;gap:7px;border:1px solid var(--line)}.tile .emoji{font-size:23px}.tile b{font-size:14px}.tile span:last-child{font-size:11px;color:var(--muted)}
+.wide{grid-column:1/-1}.soft{background:var(--mint);border:1px solid #d5e7d9;border-radius:18px;padding:16px}.soft b{color:var(--green)}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(12px);border-top:1px solid var(--line);z-index:5}.bottom-inner{max-width:1040px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 10px calc(8px + env(safe-area-inset-bottom))}
+.tab{border:0;background:transparent;color:var(--muted);padding:7px 3px;font-size:11px}.tab strong{display:block;font-size:19px;font-weight:500}.tab.active{color:var(--green);font-weight:800}
+.view{display:none}.view.active{display:block}
+.card h3{margin:0 0 5px;font-size:17px}.muted{color:var(--muted);font-size:13px}.field{width:100%;border:1px solid var(--line);background:#fbfcfa;border-radius:12px;padding:12px;color:var(--ink);margin-top:6px}
+label{display:block;font-size:13px;font-weight:650;margin:13px 0 5px}.primary{width:100%;background:var(--green);color:#fff;border:0;border-radius:13px;padding:13px 16px;font-weight:800;margin-top:14px}.secondary{border:1px solid var(--line);background:#fff;color:var(--green);border-radius:12px;padding:10px 13px;font-weight:700}.pill{display:inline-block;border-radius:30px;background:var(--mint);color:var(--green);font-size:11px;font-weight:800;padding:5px 9px}
+.choice{display:flex;gap:9px;align-items:flex-start;border:1px solid var(--line);padding:11px;border-radius:12px;margin:8px 0;font-size:13px}.choice input{margin-top:4px;accent-color:var(--green)}
+.notice{background:#fff8e9;border:1px solid #efe0bd;padding:12px;border-radius:12px;font-size:12px;color:#655334}
+.progress{height:7px;background:#e7ece7;border-radius:20px;overflow:hidden;margin:12px 0}.progress i{display:block;height:100%;background:var(--green2);width:0}
+.result{background:#f1f6f1;border-radius:14px;padding:14px;white-space:pre-wrap;font-size:13px}
+.hide{display:none!important}.row{display:flex;gap:9px;flex-wrap:wrap}.row>*{flex:1}
+.modal{position:fixed;inset:0;background:#10251dcc;z-index:10;display:none;align-items:end;justify-content:center;padding:12px}.modal.show{display:flex}.sheet{background:var(--surface);border-radius:22px 22px 16px 16px;padding:20px;width:min(100%,600px);max-height:90vh;overflow:auto}
+small{color:var(--muted)}.adminline{border-bottom:1px solid var(--line);padding:10px 0;display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:13px}
+@media(min-width:700px){.top{padding:28px 34px 34px;border-radius:0 0 34px 34px}.content{padding:24px 30px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.tile{min-height:145px}.hero{padding-top:38px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="nav"><div class="brand" id="brandName">INNERLY <small>PRIVATE WELLNESS & RELATIONSHIPS</small></div><button class="iconbtn" id="settingsBtn" aria-label="Settings">⚙ Settings</button></div>
+ <div class="hero"><div class="eyebrow">A PRIVATE SPACE TO UNDERSTAND YOURSELF</div><h1>Know yourself.<br>Connect with care.</h1><p>যৌনস্বাস্থ্য, ব্যক্তিগত চাহিদা, ঘনিষ্ঠতা ও সম্পর্ক নিয়ে জানুন—নিজের গতিতে, নিজের সিদ্ধান্তে, সম্মতির সঙ্গে।</p><button class="cta" id="startBtn">Start a private check-in&nbsp; →</button></div>
+</header>
+<main class="content">
+<section class="view active" id="homeView">
+ <div class="soft"><b>আপনার ব্যক্তিগত জায়গা</b><div class="muted">এখানে কোনো বিচার নেই। আপনার উত্তর আপনারই। অন্য কারও হয়ে অনুমান নয়—প্রত্যেকে নিজের তথ্য নিজে দেবেন।</div></div>
+ <div class="section-head"><div><h2>Explore your wellbeing</h2><p>আপনার প্রয়োজন অনুযায়ী একটি বিষয় বেছে নিন</p></div><span class="pill">18+ only</span></div>
+ <div class="grid">
+  <button class="tile" data-assess="desire"><span class="emoji">🌿</span><b>Desire & Libido</b><span>নিজের আকাঙ্ক্ষা ও পরিবর্তন বোঝা</span></button>
+  <button class="tile" data-assess="satisfaction"><span class="emoji">💚</span><b>Intimacy & Satisfaction</b><span>ঘনিষ্ঠতা ও ব্যক্তিগত সন্তুষ্টি</span></button>
+  <button class="tile" data-assess="relationship"><span class="emoji">🤝</span><b>Relationship Check-in</b><span>যোগাযোগ, বিশ্বাস ও সংযোগ</span></button>
+  <button class="tile" data-assess="performance"><span class="emoji">✨</span><b>Sexual Wellness</b><span>স্বাস্থ্য, স্বাচ্ছন্দ্য ও উদ্বেগ</span></button>
+  <button class="tile" data-assess="communication"><span class="emoji">💬</span><b>Talk Together</b><span>সঙ্গীর সঙ্গে সম্মতিপূর্ণ আলোচনা</span></button>
+  <button class="tile" data-assess="learning"><span class="emoji">📚</span><b>Learn & Explore</b><span>যৌনস্বাস্থ্য ও সম্পর্কের শিক্ষা</span></button>
+ </div>
+ <div class="section-head"><div><h2>How it works</h2><p>স্বচ্ছ, ব্যক্তিগত এবং প্রমাণ-সচেতন</p></div></div>
+ <div class="card"><div class="row"><div><span class="pill">01 · Self-report</span><h3 style="margin-top:8px">You tell, not the camera</h3><p class="muted">নিজের অনুভূতি ও অভিজ্ঞতা আপনি নিজেই জানান। ছবি বা কণ্ঠ দেখে গোপন যৌন বৈশিষ্ট্য অনুমান করা হয় না।</p></div></div><div class="row"><div><span class="pill">02 · Reflection</span><h3 style="margin-top:8px">Understand patterns</h3><p class="muted">উত্তরগুলোকে শিক্ষামূলকভাবে সাজিয়ে ভাবনার জায়গা তৈরি করা হয়—কোনো রোগনির্ণয় নয়।</p></div></div><div><span class="pill">03 · Consent</span><h3 style="margin-top:8px">Share only by choice</h3><p class="muted">সঙ্গী নিজের উত্তর নিজে দিলে এবং দুজন সম্মতি দিলে তবেই যৌথ আলোচনা।</p></div></div>
+</section>
+<section class="view" id="checkinView">
+ <div class="section-head"><div><h2 id="checkTitle">Private check-in</h2><p id="checkSubtitle">নিজের জন্য সময় নিন।</p></div><span class="pill">Private</span></div>
+ <div class="card">
+  <div class="notice">এটি ১৮+ প্রাপ্তবয়স্কদের শিক্ষামূলক স্ব-মূল্যায়ন। প্রশ্নের উত্তর দেওয়া ঐচ্ছিক। আপনার উত্তর কোনো ক্লিনিক্যাল পরীক্ষা নয়।</div>
+  <div class="progress"><i id="progressBar"></i></div><div class="muted" id="stepCount">Question 1</div>
+  <div id="questionArea"></div>
+  <div class="row"><button class="secondary" id="prevQ">Back</button><button class="primary" style="margin-top:0" id="nextQ">Continue</button></div>
+ </div>
+</section>
+<section class="view" id="learnView">
+ <div class="section-head"><div><h2>Learn & Explore</h2><p>যৌনস্বাস্থ্য ও সম্পর্ক বিষয়ে নির্ভরযোগ্য শিক্ষা</p></div></div>
+ <div class="card"><h3>Desire is personal</h3><p class="muted">যৌন আকাঙ্ক্ষা ব্যক্তি ভেদে আলাদা এবং সময়, স্বাস্থ্য, মানসিক অবস্থা, সম্পর্ক ও জীবনের পরিস্থিতির সঙ্গে বদলাতে পারে। কোনো একক “স্বাভাবিক” মাত্রা নেই।</p></div>
+ <div class="card"><h3>Performance is not a score</h3><p class="muted">যৌনজীবনের অভিজ্ঞতা শুধু পারফরম্যান্স দিয়ে মাপা যায় না। স্বাচ্ছন্দ্য, সম্মতি, যোগাযোগ, আনন্দ ও স্বাস্থ্যও গুরুত্বপূর্ণ।</p></div>
+ <div class="card"><h3>Ancient texts & modern science</h3><p class="muted">সামুদ্রিক শাস্ত্র ও কামশাস্ত্র ঐতিহাসিক-সাংস্কৃতিক উৎস। এগুলোর দেহ-লক্ষণভিত্তিক ধারণা আধুনিক বৈজ্ঞানিকভাবে যাচাইকৃত ব্যক্তিত্ব বা যৌন-আকাঙ্ক্ষা নির্ণয় পদ্ধতি নয়।</p></div>
+ <div class="card"><h3>When to seek support</h3><p class="muted">যৌনস্বাস্থ্য, ব্যথা, ইরেকশন/উত্তেজনা, আকাঙ্ক্ষার পরিবর্তন বা সম্পর্কজনিত কষ্ট নিয়ে উদ্বেগ থাকলে যোগ্য চিকিৎসক বা যৌনস্বাস্থ্য বিশেষজ্ঞের সঙ্গে কথা বলুন।</p></div>
+</section>
+<section class="view" id="profileView">
+ <div class="section-head"><div><h2>Your space</h2><p>অ্যাপের নিয়ন্ত্রণ ও গোপনীয়তা</p></div></div>
+ <div class="card"><h3>Privacy first</h3><p class="muted">এই প্রোটোটাইপ আপনার উত্তর সার্ভারে পাঠায় না। রিপোর্ট তৈরি হয় এই ডিভাইসের ব্রাউজারে। ট্যাব বন্ধ করলে উত্তর স্থায়ীভাবে সংরক্ষিত থাকবে না।</p><button class="secondary" id="clearBtn">Clear current answers</button></div>
+ <div class="card"><h3>Partner check-in</h3><p class="muted">সঙ্গীকে এই অ্যাপের লিংক পাঠান। তিনি নিজের ডিভাইসে নিজে উত্তর দেবেন। দুজনের স্পষ্ট সম্মতি ছাড়া উত্তর সংগ্রহ বা তুলনা করবেন না। এই প্রোটোটাইপে এখনো নিরাপদ partner-link বা account sync নেই।</p><button class="secondary" id="shareBtn">Share app link</button></div>
+ <div class="card"><h3>About this prototype</h3><p class="muted">Innerly · Research concept 1.0. এটি AI diagnosis বা media-analysis service নয়।</p></div>
+</section>
+</main>
+</div>
+<nav class="bottom"><div class="bottom-inner">
+<button class="tab active" data-view="homeView"><strong>⌂</strong>Home</button>
+<button class="tab" data-view="checkinView"><strong>♡</strong>Check-in</button>
+<button class="tab" data-view="learnView"><strong>▤</strong>Learn</button>
+<button class="tab" data-view="profileView"><strong>☻</strong>My space</button>
+</div></nav>
+<div class="modal" id="settingsModal"><div class="sheet">
+ <div class="row"><h2 style="margin:0">Owner preview settings</h2><button class="secondary" id="closeSettings" style="flex:0 0 auto">Close</button></div>
+ <p class="muted">এই সেটিংস শুধু এই ব্রাউজারের local prototype-এ কাজ করে। এটি নিরাপদ multi-user admin console নয়।</p>
+ <label>App display name</label><input class="field" id="appName" value="INNERLY">
+ <label>Accent theme</label><select class="field" id="theme"><option value="green">Forest green</option><option value="rose">Soft rose</option><option value="blue">Calm blue</option></select>
+ <div class="adminline"><span>Show educational library</span><input type="checkbox" id="libraryToggle" checked></div>
+ <div class="adminline"><span>Show partner check-in info</span><input type="checkbox" id="partnerToggle" checked></div>
+ <button class="primary" id="saveSettings">Apply preview settings</button>
+ <p class="small">Production admin controls, user management, analytics, moderation, secure storage and content publishing require a protected backend and administrator login.</p>
+</div></div>
+<div class="modal" id="resultModal"><div class="sheet">
+ <div class="row"><h2 style="margin:0">Your reflection</h2><button class="secondary" id="closeResult" style="flex:0 0 auto">Close</button></div>
+ <p class="muted">এটি আপনার দেওয়া উত্তরের প্রতিফলন; clinical diagnosis, অন্য ব্যক্তির মূল্যায়ন বা performance score নয়।</p>
+ <div class="result" id="resultText"></div>
+ <div class="row" style="margin-top:12px"><button class="secondary" id="copyResult">Copy reflection</button><button class="primary" style="margin:0" id="finishResult">Finish</button></div>
+</div></div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const state={view:'homeView',kind:'desire',step:0,answers:{},ageOk:false};
+const sets={
+desire:{title:'Desire & Libido',sub:'নিজের আকাঙ্ক্ষা সম্পর্কে আপনার অভিজ্ঞতা',qs:[
+['সাম্প্রতিক সময়ে নিজের যৌন আকাঙ্ক্ষা কেমন অনুভব করছেন?',['খুব কম','কম','মাঝারি','বেশি','পরিবর্তনশীল','উত্তর দিতে চাই না']],
+['এই মাত্রা আপনার কাছে কেমন লাগছে?',['আমার জন্য ঠিক আছে','এ নিয়ে কৌতূহলী','কিছুটা উদ্বিগ্ন','কষ্ট হচ্ছে','উত্তর দিতে চাই না']],
+['আকাঙ্ক্ষায় কোনো পরিবর্তন লক্ষ্য করেছেন?',['হ্যাঁ, বেড়েছে','হ্যাঁ, কমেছে','ওঠানামা করছে','বিশেষ পরিবর্তন নেই','বলতে চাই না']],
+['কোন বিষয়গুলো প্রভাব ফেলতে পারে বলে মনে হয়?',['চাপ/ক্লান্তি','স্বাস্থ্য/ওষুধ','সম্পর্ক/যোগাযোগ','জীবনযাপন/ঘুম','নিশ্চিত নই','একাধিক বিষয়']]
+]},
+satisfaction:{title:'Intimacy & Satisfaction',sub:'ঘনিষ্ঠতা ও সন্তুষ্টি নিয়ে নিজের ভাবনা',qs:[
+['বর্তমান ঘনিষ্ঠতার অভিজ্ঞতায় আপনি কতটা সন্তুষ্ট?',['একেবারেই নই','কিছুটা অসন্তুষ্ট','মোটামুটি','সন্তুষ্ট','খুব সন্তুষ্ট','প্রযোজ্য নয়']],
+['আপনার স্বাচ্ছন্দ্য ও সীমারেখা সম্মানিত হয়?',['সবসময়','বেশিরভাগ সময়','কখনো কখনো','না','উত্তর দিতে চাই না']],
+['আপনি কি নিজের প্রয়োজন নিয়ে খোলামেলা কথা বলতে পারেন?',['হ্যাঁ','কখনো কখনো','কঠিন লাগে','প্রযোজ্য নয়']],
+['কোন বিষয়টি উন্নত হলে ভালো লাগবে?',['যোগাযোগ','আবেগগত সংযোগ','সময়/মনোযোগ','স্বাস্থ্য/স্বাচ্ছন্দ্য','কিছু পরিবর্তন দরকার নেই']]
+]},
+relationship:{title:'Relationship Check-in',sub:'সম্পর্কের যোগাযোগ ও সংযোগ',qs:[
+['সম্পর্কে আপনি কতটা নিরাপদ ও সম্মানিত বোধ করেন?',['খুব','মোটামুটি','কখনো কখনো','না','প্রযোজ্য নয়']],
+['মতভেদ হলে কীভাবে সামলান?',['শান্তভাবে কথা বলি','সময় নিয়ে পরে কথা বলি','এড়িয়ে যাই','ঝগড়া হয়','প্রযোজ্য নয়']],
+['আপনার সঙ্গী কি আপনার কথা মন দিয়ে শোনেন?',['সাধারণত','কখনো কখনো','খুব কম','প্রযোজ্য নয়']],
+['সম্পর্কে আপনার সবচেয়ে গুরুত্বপূর্ণ প্রয়োজন কী?',['বিশ্বাস','যোগাযোগ','স্নেহ/ঘনিষ্ঠতা','স্বাধীনতা/ব্যক্তিগত সময়','পারস্পরিক সহযোগিতা']]
+]},
+performance:{title:'Sexual Wellness',sub:'স্বাস্থ্য, স্বাচ্ছন্দ্য ও উদ্বেগ',qs:[
+['যৌনস্বাস্থ্য নিয়ে বর্তমানে কোনো উদ্বেগ আছে?',['না','কিছুটা','হ্যাঁ','নিশ্চিত নই','উত্তর দিতে চাই না']],
+['ঘনিষ্ঠতার সময় ব্যথা বা অস্বস্তি হয়?',['না','কখনো','প্রায়ই','প্রযোজ্য নয়','উত্তর দিতে চাই না']],
+['নিজের শরীর ও সীমা নিয়ে কতটা স্বাচ্ছন্দ্যবোধ করেন?',['খুব','মোটামুটি','কম','নিশ্চিত নই']],
+['আপনি কী ধরনের সহায়তা চান?',['শিক্ষামূলক তথ্য','চিকিৎসকের পরামর্শ','সঙ্গীর সঙ্গে কথা বলা','এখনো নিশ্চিত নই']]
+]},
+communication:{title:'Talk Together',sub:'সম্মতিপূর্ণ আলোচনা শুরু করার ভাবনা',qs:[
+['কোন বিষয়ে সঙ্গীর সঙ্গে কথা বলতে চান?',['চাহিদা ও পছন্দ','সীমারেখা ও সম্মতি','ঘনিষ্ঠতা ও সময়','স্বাস্থ্য ও নিরাপত্তা','সবগুলো']],
+['কথা বলার সময় কোনটি সাহায্য করবে?',['শান্ত সময়','বিচারহীন পরিবেশ','আগে থেকে বিষয় জানানো','কাউন্সেলরের সহায়তা']],
+['আপনি কি দুজনের স্বেচ্ছায় অংশগ্রহণ চান?',['হ্যাঁ','এখনো আলোচনা করিনি','না']]
+]},
+learning:{title:'Learning interests',sub:'আপনি কোন বিষয় শিখতে চান?',qs:[
+['কোন বিষয়ে জানতে আগ্রহী?',['যৌনস্বাস্থ্য','সম্পর্ক ও যোগাযোগ','আকাঙ্ক্ষার পরিবর্তন','সম্মতি ও নিরাপত্তা','প্রাচীন শাস্ত্র বনাম বিজ্ঞান']],
+['কোন ফরম্যাট পছন্দ?',['সহজ বাংলা গাইড','গবেষণার সারাংশ','প্রশ্নোত্তর','দম্পতির আলোচনা গাইড']]
+]}
+};
+function showView(id){document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view===id));state.view=id;window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
+function begin(kind){state.kind=kind;state.step=0;state.answers={};const s=sets[kind];$('checkTitle').textContent=s.title;$('checkSubtitle').textContent=s.sub;showView('checkinView');renderQ()}
+function renderQ(){const s=sets[state.kind],q=s.qs[state.step];$('stepCount').textContent=`Question ${state.step+1} of ${s.qs.length}`;$('progressBar').style.width=((state.step+1)/s.qs.length*100)+'%';let box=$('questionArea');box.innerHTML='';let h=document.createElement('h3');h.textContent=q[0];h.style.margin='20px 0 12px';box.append(h);q[1].forEach(v=>{let l=document.createElement('label');l.className='choice';let i=document.createElement('input');i.type='radio';i.name='answer';i.value=v;i.checked=state.answers[state.step]===v;i.addEventListener('change',()=>state.answers[state.step]=v);let span=document.createElement('span');span.textContent=v;l.append(i,span);box.append(l)});$('prevQ').disabled=state.step===0;$('prevQ').style.opacity=state.step===0?.45:1;$('nextQ').textContent=state.step===s.qs.length-1?'Create reflection':'Continue'}
+function makeResult(){let s=sets[state.kind],out=`${s.title}\\n\\nআপনার উত্তরগুলোর সারাংশ:\\n`;s.qs.forEach((q,i)=>out+=`• ${q[0]}\\n  ${state.answers[i]||'উত্তর দেওয়া হয়নি'}\\n`);out+='\\nভাবনার জন্য: কোন উত্তরটি আপনার কাছে সবচেয়ে গুরুত্বপূর্ণ মনে হয়েছে? প্রয়োজন হলে সঙ্গীর সঙ্গে সম্মতিপূর্ণভাবে কথা বলুন বা যোগ্য স্বাস্থ্য-পেশাজীবীর পরামর্শ নিন।\\n\\nএটি কোনো diagnosis, objective libido score, sexual performance rating বা অন্য ব্যক্তির বিষয়ে সিদ্ধান্ত নয়।';$('resultText').textContent=out;$('resultModal').classList.add('show')}
+$('nextQ').addEventListener('click',()=>{let s=sets[state.kind];if(!state.answers[state.step]){if(!confirm('এই প্রশ্নের উত্তর না দিয়ে এগোতে চান?'))return}if(state.step<s.qs.length-1){state.step++;renderQ()}else makeResult()});
+$('prevQ').addEventListener('click',()=>{if(state.step>0){state.step--;renderQ()}});
+document.querySelectorAll('[data-assess]').forEach(b=>b.addEventListener('click',()=>begin(b.dataset.assess)));
+$('startBtn').onclick=()=>begin('desire');
+$('closeResult').onclick=$('finishResult').onclick=()=>{$('resultModal').classList.remove('show');showView('homeView')};
+$('copyResult').onclick=()=>{let t=$('resultText').textContent;if(navigator.clipboard?.writeText)navigator.clipboard.writeText(t).then(()=>alert('Reflection copied')).catch(()=>alert('Copy unavailable'));else alert('Copy not supported in this browser')};
+$('clearBtn').onclick=()=>{state.answers={};state.step=0;alert('এই সেশনের উত্তরগুলো clear করা হয়েছে।')};
+$('shareBtn').onclick=()=>{if(navigator.share)navigator.share({title:'Innerly — Private Wellness',text:'Explore a private, consent-first sexual wellness and relationship education app.',url:location.href}).catch(()=>{});else if(navigator.clipboard?.writeText)navigator.clipboard.writeText(location.href).then(()=>alert('App link copied'));else alert('এই অ্যাপের URL কপি করে শেয়ার করুন।')};
+$('settingsBtn').onclick=()=>$('settingsModal').classList.add('show');$('closeSettings').onclick=()=>$('settingsModal').classList.remove('show');
+$('saveSettings').onclick=()=>{let name=$('appName').value.trim()||'INNERLY';$('brandName').innerHTML='';$('brandName').append(document.createTextNode(name+' '));let sm=document.createElement('small');sm.textContent='PRIVATE WELLNESS & RELATIONSHIPS';$('brandName').append(sm);let t=$('theme').value;let colors={green:['#f4f6f1','#174f3b','#e7f2eb'],rose:['#faf4f3','#744b50','#f7e9e8'],blue:['#f1f5f8','#315b79','#e5eff6']};document.documentElement.style.setProperty('--bg',colors[t][0]);document.documentElement.style.setProperty('--green',colors[t][1]);document.documentElement.style.setProperty('--mint',colors[t][2]);$('learnView').classList.toggle('hide',!$('libraryToggle').checked);document.querySelector('[data-view="learnView"]').classList.toggle('hide',!$('libraryToggle').checked);document.querySelectorAll('.partnerToggle').forEach(x=>x.classList.toggle('hide',!$('partnerToggle').checked));$('settingsModal').classList.remove('show');alert('Preview settings applied on this device.')};
+if('serviceWorker'in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+})();
+</script>
+</body>
+</html>
